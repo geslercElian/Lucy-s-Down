@@ -56,4 +56,5 @@ function resetearContador() {
 }
 
 // Inicializar calculadora al cargar la página
+alert('Proximamente nuevas funcionalidades');
 document.addEventListener('DOMContentLoaded', calcularTotal);
