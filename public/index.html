@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lucy's Down</title>
+    <link rel="icon" href="icon(2).png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Lucy's Down</h1>
+            <p>Añade la cantidad de billetes para calcular el resultado.</p>
+        </div>
+
+        <div class="content">
+            <div class="billetes-section">
+                <h2>Selecione la cantidad.</h2>
+                <div class="billetes-grid">
+                    <!-- Billete de C$500 -->
+                    <div class="billete-card">
+                       
+                        <div class="billete-value">C$ 500</div>
+                        <div class="cantidad-control">
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete500', -1)">-</button>
+                            <input type="number" id="billete500" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete500', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Billete de C$200 -->
+                    <div class="billete-card">
+                        
+                        <div class="billete-value">C$ 200</div>
+                        <div class="cantidad-control">
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete200', -1)">-</button>
+                            <input type="number" id="billete200" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete200', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Billete de C$100 -->
+                    <div class="billete-card">
+                                                                 
+                        <div class="billete-value">C$ 100</div>
+                        <div class="cantidad-control">
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete100', -1)">-</button>
+                            <input type="number" id="billete100" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete100', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Billete de C$50 -->
+                    <div class="billete-card">
+                        
+                        <div class="billete-value">C$ 50</div>
+                        <div class="cantidad-control">
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete50', -1)">-</button>
+                            <input type="number" id="billete50" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete50', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Billete de C$20 -->
+                    <div class="billete-card">
+                        
+                        <div class="billete-value">C$ 20</div>
+                        <div class="cantidad-control">
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete20', -1)">-</button>
+                            <input type="number" id="billete20" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete20', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Billete de C$10 -->
+                    <div class="billete-card">
+                        
+                        <div class="billete-value">C$ 10</div>
+                        <div class="cantidad-control">
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete10', -1)">-</button>
+                            <input type="number" id="billete10" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete10', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resumen-section">
+                <div class="total-display">
+                    <div class="total-label">TOTAL</div>
+                    <div class="total-amount" id="totalAmount">C$ 0.00</div>
+                    <div class="total-label">MONEDA EN DECADENCIA</div>
+                </div>
+
+                <h3>Cantidad de billetes.</h3>
+                <ul class="desglose-list" id="desgloseList">
+                    <li class="desglose-item">C$ 500: <span id="subtotal500">0 billetes = C$ 0.00</span></li>
+                    <li class="desglose-item">C$ 200: <span id="subtotal200">0 billetes = C$ 0.00</span></li>
+                    <li class="desglose-item">C$ 100: <span id="subtotal100">0 billetes = C$ 0.00</span></li>
+                    <li class="desglose-item">C$ 50: <span id="subtotal50">0 billetes = C$ 0.00</span></li>
+                    <li class="desglose-item">C$ 20: <span id="subtotal20">0 billetes = C$ 0.00</span></li>
+                    <li class="desglose-item">C$ 10: <span id="subtotal10">0 billetes = C$ 0.00</span></li>
+                </ul>
+
+                <button class="reset-btn" onclick="resetearContador()">Borrar la cuenta.</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Lucy's Down - Powered By Gesler Calero.</p>
+        </div>
+    </div>
+
+    <script src="document.js"></script>
+</body>
+</html>
