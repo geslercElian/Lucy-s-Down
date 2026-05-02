@@ -11,6 +11,7 @@ function cambiarCantidad(inputId, cambio) {
 
 function calcularTotal() {
     const valores = {
+        billete1000: 1000,
         billete500: 500,
         billete200: 200,
         billete100: 100,

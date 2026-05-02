@@ -18,6 +18,16 @@
             <div class="billetes-section">
                 <h2>Selecione la cantidad.</h2>
                 <div class="billetes-grid">
+                    
+                    <div class="billete-card">
+                        
+                        <div class="billete-value">C$ 1000</div>
+                        <div class="cantidad-control">
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete1000', -1)">-</button>
+                            <input type="number" id="billete1000" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
+                            <button class="cantidad-btn" onclick="cambiarCantidad('billete1000', 1)">+</button>
+                        </div>
+
                     <!-- Billete de C$500 -->
                     <div class="billete-card">
                        
