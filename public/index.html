@@ -1,127 +1,167 @@
-<!DOCTYPE html>
+<!--- Página de bienvenida con efecto de desvanecimiento y redirección -->
+<!doctype html>
 <html lang="es">
+<link rel="icon" href="icon(2).png" type="image/png" />
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lucy's Down</title>
-    <link rel="icon" href="icon(2).png" type="image/png" />
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lucy's Down</title>
+  <style>
+    :root{
+      --bg-1: #081229;
+      --bg-2: #0f3759;
+      --accent: #ffd166;
+      --glass: rgba(255,255,255,0.06);
+      --card-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      --radius: 18px;
+      --fs-title: clamp(28px, 6vw, 64px);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui;
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(255,209,102,0.06), transparent 8%),
+                  linear-gradient(120deg, var(--bg-1), var(--bg-2));
+      color: #fff;
+      display:grid;
+      place-items:center;
+      padding:24px;
+      overflow:hidden;
+    }
+    .splash{
+      width:min(1000px, 92vw);
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      box-shadow: var(--card-shadow);
+      padding: clamp(24px, 5vw, 48px);
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+      position:relative;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .splash.oculto {
+      opacity: 0;
+      transform: translateY(-40px);
+      pointer-events: none;
+    }
+    .splash::before, .splash::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      filter: blur(60px);
+      opacity:0.35;
+    }
+    .splash::before{
+      width:420px;height:420px;
+      background: linear-gradient(45deg, rgba(255,209,102,0.08), rgba(255,255,255,0.02));
+      top:-10%; left:-18%;
+      animation: floatA 8s ease-in-out infinite;
+    }
+    .splash::after{
+      width:300px;height:300px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,209,102,0.06));
+      bottom:-10%; right:-12%;
+      animation: floatB 10s ease-in-out infinite;
+    }
+    @keyframes floatA{
+      0%{transform: translateY(0) rotate(0)}
+      50%{transform: translateY(18px) rotate(8deg)}
+      100%{transform: translateY(0) rotate(0)}
+    }
+    @keyframes floatB{
+      0%{transform: translateY(0) rotate(0)}
+      50%{transform: translateY(-18px) rotate(-6deg)}
+      100%{transform: translateY(0) rotate(0)}
+    }
+    .hero{display:flex;flex-direction:column;gap:8px;z-index:2;flex:1;}
+    .subtitle{color:rgba(255,255,255,0.65);font-weight:500;letter-spacing:0.4px;font-size:clamp(12px, 1.6vw, 16px);}
+    .title{
+      font-weight:800;
+      font-size: var(--fs-title);
+      line-height:1;
+      letter-spacing:-1px;
+      margin-top:4px;
+      display:inline-block;
+      background: linear-gradient(90deg, #fff, #ffd166 40%, #ffe39f 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: popIn 900ms cubic-bezier(.2,.9,.3,1) both;
+    }
+    @keyframes popIn{
+      0%{transform: translateY(18px) scale(.98); opacity:0}
+      60%{transform: translateY(-6px) scale(1.02); opacity:1}
+      100%{transform: translateY(0) scale(1)}
+    }
+    .meta{display:flex;gap:12px;align-items:center;margin-top:12px;}
+    .badge{
+      padding:6px 10px;
+      background:var(--glass);
+      border-radius:999px;
+      font-size:13px;
+      color: rgba(255,255,255,0.9);
+      border:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+    .visual{
+      width:140px;
+      height:140px;
+      min-width:140px;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,209,102,0.06));
+      display:grid;
+      place-items:center;
+      z-index:2;
+      border:1px solid rgba(255,255,255,0.035);
+    }
+    .icon {
+      font-size:56px;
+      transform: translateY(-6px);
+      filter: drop-shadow(0 6px 18px rgba(2,6,23,0.5));
+    }
+    .footer{margin-top:14px;color:rgba(255,255,255,0.65);font-size:13px;}
+    @media (max-width:720px){
+      .splash{flex-direction:column;align-items:flex-start;gap:16px}
+      .visual{min-width:100%;width:100%;height:92px;border-radius:12px}
+      .icon{font-size:36px;transform:none}
+      .meta{flex-wrap:wrap}
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Lucy's Down</h1>
-            <p>Añade la cantidad de billetes para calcular el resultado.</p>
-        </div>
+  <main class="splash" id="splash">
+    <section class="hero">
+      <div class="subtitle">Estamos arrancando esta cosita.</div>
+      <h1 class="title">Bienvenid@s</h1>
+      <div class="meta">
+        <div class="badge">Gracias por la confianza en esta futura empresita 👍</div>
+        <div class="badge">Ya casi.</div>
+      </div>
+      <div class="footer">
+        Cargando.
+      </div>
+    </section>
+    <aside class="visual"><div class="icon">✨</div></aside>
+  </main>
 
-        <div class="content">
-            <div class="billetes-section">
-                <h2>Selecione la cantidad.</h2>
-                <div class="billetes-grid">
-                    
-                    <div class="billete-card">
-                        
-                        <div class="billete-value">C$ 1000</div>
-                        <div class="cantidad-control">
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete1000', -1)">-</button>
-                            <input type="number" id="billete1000" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete1000', 1)">+</button>
-                        </div>
+  <!-- SNIPPET DE DESVANECIMIENTO + REDIRECCIÓN -->
+  <script>
+    // Espera 3 segundos antes de ocultar el splash
+    setTimeout(() => {
+      const splash = document.getElementById('splash');
+      splash.classList.add('oculto');
 
-                    <!-- Billete de C$500 -->
-                    <div class="billete-card">
-                       
-                        <div class="billete-value">C$ 500</div>
-                        <div class="cantidad-control">
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete500', -1)">-</button>
-                            <input type="number" id="billete500" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete500', 1)">+</button>
-                        </div>
-                    </div>
+      // Espera 1 segundo más (duración del fade-out) y redirige a la app
+      setTimeout(() => {
+        // 🔽 Cambia esta URL por la de tu app:
+        window.location.href = "app.html"; 
+      }, 1000);
 
-                    <!-- Billete de C$200 -->
-                    <div class="billete-card">
-                        
-                        <div class="billete-value">C$ 200</div>
-                        <div class="cantidad-control">
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete200', -1)">-</button>
-                            <input type="number" id="billete200" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete200', 1)">+</button>
-                        </div>
-                    </div>
-
-                    <!-- Billete de C$100 -->
-                    <div class="billete-card">
-                                                                 
-                        <div class="billete-value">C$ 100</div>
-                        <div class="cantidad-control">
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete100', -1)">-</button>
-                            <input type="number" id="billete100" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete100', 1)">+</button>
-                        </div>
-                    </div>
-
-                    <!-- Billete de C$50 -->
-                    <div class="billete-card">
-                        
-                        <div class="billete-value">C$ 50</div>
-                        <div class="cantidad-control">
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete50', -1)">-</button>
-                            <input type="number" id="billete50" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete50', 1)">+</button>
-                        </div>
-                    </div>
-
-                    <!-- Billete de C$20 -->
-                    <div class="billete-card">
-                        
-                        <div class="billete-value">C$ 20</div>
-                        <div class="cantidad-control">
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete20', -1)">-</button>
-                            <input type="number" id="billete20" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete20', 1)">+</button>
-                        </div>
-                    </div>
-
-                    <!-- Billete de C$10 -->
-                    <div class="billete-card">
-                        
-                        <div class="billete-value">C$ 10</div>
-                        <div class="cantidad-control">
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete10', -1)">-</button>
-                            <input type="number" id="billete10" class="cantidad-input" value="0" min="0" onchange="calcularTotal()" />
-                            <button class="cantidad-btn" onclick="cambiarCantidad('billete10', 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="resumen-section">
-                <div class="total-display">
-                    <div class="total-label">TOTAL</div>
-                    <div class="total-amount" id="totalAmount">C$ 0.00</div>
-                    <div class="total-label">MONEDA EN DECADENCIA</div>
-                </div>
-
-                <h3>Cantidad de billetes.</h3>
-                <ul class="desglose-list" id="desgloseList">
-                    <li class="desglose-item">C$ 500: <span id="subtotal500">0 billetes = C$ 0.00</span></li>
-                    <li class="desglose-item">C$ 200: <span id="subtotal200">0 billetes = C$ 0.00</span></li>
-                    <li class="desglose-item">C$ 100: <span id="subtotal100">0 billetes = C$ 0.00</span></li>
-                    <li class="desglose-item">C$ 50: <span id="subtotal50">0 billetes = C$ 0.00</span></li>
-                    <li class="desglose-item">C$ 20: <span id="subtotal20">0 billetes = C$ 0.00</span></li>
-                    <li class="desglose-item">C$ 10: <span id="subtotal10">0 billetes = C$ 0.00</span></li>
-                </ul>
-
-                <button class="reset-btn" onclick="resetearContador()">Borrar la cuenta.</button>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>© 2025 Lucy's Down - Powered By Gesler Calero.</p>
-        </div>
-    </div>
-
-    <script src="document.js"></script>
+    }, 4000); // 3000 ms = 3 segundos antes del desvanecimiento
+  </script>
 </body>
 </html>

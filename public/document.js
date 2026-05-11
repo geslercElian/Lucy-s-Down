@@ -17,7 +17,9 @@ function calcularTotal() {
         billete100: 100,
         billete50: 50,
         billete20: 20,
-        billete10: 10
+        billete10: 10,
+        billete5: 5,
+        billete1: 1
     };
 
     let total = 0;
